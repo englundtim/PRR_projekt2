@@ -113,7 +113,13 @@ public class App {
     }
 
     static void calcProfit(String[][] seating){
-        
+        double profits=0;
+        for (int i = 0; i < seating.length; i++) {
+            if (seating[i][0]=="1") {
+                profits+=299.99;
+            }
+        }
+        System.out.println(profits);
     }
     static void findBooking(String[][] seating){
 

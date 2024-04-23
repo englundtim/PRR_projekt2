@@ -4,18 +4,17 @@ public class App {
     public static Scanner tb = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-        
         boolean run = true;
         String [][] seating = new String[20][4];
+        seatingDef(seating);
+        while (run) {
+            menu(seating);
+        }
+    }
+    static void seatingDef(String[][] seating){
         for (int i = 0; i < seating.length; i++) {
             seating[i][0]="0";
         }
-        while (run) {
-            menu(seating);
-
-            
-        }
-        
     }
 
     static void menu(String[][] seating){
@@ -30,35 +29,47 @@ public class App {
             System.out.println("Välj en siffra ditt orpon");
             menu_choice = 0;
         }
-        if(menu_choice<1 || menu_choice>4){
-            System.out.println("Välj val 1, 2, 3 eller 4");
+        if(menu_choice<1 || menu_choice>6){
+            System.out.println("Välj val 1, 2, 3 4, 5 eller 6");
             menu_choice = 0;
         }
        
         switch (menu_choice) {
             case 1:
                 System.out.println("lägg till bokning");
-                booking(seating);
+                createBooking(seating);
                 break;
             case 2:
                 System.out.println("platser:");
+                viewPlacements(seating);
                 break;
             case 3:
                 System.out.println("vinsten:");
-                profit(seating);
+                calcProfit(seating);
                 break;
+            
             case 4:
+                System.out.println("hitta bokning");
+                findBooking(seating);
+                break;
+
+            case 5:
+                System.out.println("avboka");
+                cancelBooking(seating);
+                break;
+
+            case 6:
                 System.out.println("ha det bra:");
                 System.exit(0);
         }
     }
 
-    static void booking(String[][] seating){
+    static void createBooking(String[][] seating){
         boolean valid_booking=false;
         int seat;
         while (valid_booking==false) {
             System.out.println("Skriv in din önskade plats");
-            seat = tb.nextInt();
+            seat = tb.nextInt()-1;
             if( seating[seat][0]== "0"){
                 seating[seat][0]= "1";
                 System.out.println("Skriv in ditt namn");
@@ -73,14 +84,43 @@ public class App {
             }
         }
     }
-    static void profit(String[][] seating){
-        double profits=0;
-        for (int i = 0; i < seating.length; i++) {
-            if (seating[i][0]=="1") {
-                profits+=299.99;
+
+    static void viewPlacements(String[][] seating){
+        String[] seatArrangement = new String[20];
+        System.out.println("Bokade platser visas som X");
+        for (int i = 0; i < seatArrangement.length; i++) {
+            seatArrangement[i] = String.valueOf(i+1);
+            if(seating[i][0]=="1"){
+                seatArrangement[i]="X";
             }
+            if (seatArrangement[i]== "X" && seatArrangement[i].length()<2){
+                seatArrangement[i]="X"+seatArrangement[i];
+            }
+            else if (seatArrangement[i].length()<2) {
+                seatArrangement[i]="0"+seatArrangement[i];
+            }
+            System.out.print("["+seatArrangement[i]+"]");
+            if ((i+1) % 2 == 0) {
+                System.out.print("   ");
+            }
+            if((i+1) % 4 == 0){
+                System.out.println();
+            }
+
         }
-        System.out.println(profits);
+        System.out.println();
+        
     }
+
+    static void calcProfit(String[][] seating){
+        
+    }
+    static void findBooking(String[][] seating){
+
+    }
+    static void cancelBooking(String[][] seating){
+
+    }
+
 }
 

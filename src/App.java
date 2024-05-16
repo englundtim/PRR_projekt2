@@ -93,15 +93,20 @@ public class App {
                 try {
                     wentToCatch = false;
                     seat = tb.nextInt();
+                    seat--;
                 } 
                 catch (Exception e) {
                     tb.next();
                     wentToCatch = true;
                     System.out.println("Var vänlig och välj en siffra");
                 }
+                if (seat<0 || seat>21) {
+                    wentToCatch = true;
+                    System.out.println("Välj en giltig plats");
+                }
             } while (wentToCatch == true);
 
-                seat--;
+                
             //Om platsen är bokad eller inte
             if( seating[seat][0]== "0"){
                 seating[seat][0]= "1";

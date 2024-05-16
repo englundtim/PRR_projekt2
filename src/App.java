@@ -83,10 +83,10 @@ public class App {
     }
 
     static void createBooking(String[][] seating){
-        boolean valid_booking=false;
+        boolean validBooking=false;
         int seat=0;
         boolean wentToCatch = false;
-        while (valid_booking==false) {
+        while (validBooking==false) {
             System.out.println("\nSkriv in din önskade plats");
             //Try-catch sats
             do {
@@ -135,7 +135,7 @@ public class App {
                     }
                 } while (wentToCatch == true);
 
-                valid_booking=true;
+                validBooking=true;
 
             }
             else{

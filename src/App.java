@@ -122,14 +122,15 @@ public class App {
                 do {
                     try {
                         wentToCatch = false;
-                        seating[seat][2] = tb.nextLine();
+                        Long SSnumber = Long.parseLong(tb.nextLine());
+                        seating[seat][2] = String.valueOf(SSnumber);
                     } 
                     catch (Exception e) {
-                        tb.next();
                         wentToCatch = true;
-                        System.out.println("Var vänlig att skriva in rätt");
+                        System.out.println("Var vänlig att skriva in ett tal");
                     }
-                    if (seating[seat][2].length()!=12) {
+                    if (seating[seat][2].length()!=12 && wentToCatch==false) {
+                        System.out.println("För många/få tecken");
                         wentToCatch=true;
                     }
                 } while (wentToCatch == true);
@@ -196,21 +197,25 @@ public class App {
         boolean bookingFound=false;
         String choiceRead;
         int findBookingChoice;
+        boolean wentToCatch = false;
 
         System.out.println("Vill du leta efter din bokning med: \n 1. Namn \n 2. Personnummer");
         choiceRead = tb.nextLine();
         //Try-catch sats
-        try{
-            findBookingChoice = Integer.parseInt(choiceRead);
-        }
-        catch(Exception e){
-            System.out.println("Var vänlig och välj en siffra");
-            findBookingChoice = 0;
-        }
-        if(findBookingChoice<1 || findBookingChoice>2){
-            System.out.println("Välj val 1 eller 2");
-            findBookingChoice = 0;
-        }
+        do{
+            try{
+                findBookingChoice = Integer.parseInt(choiceRead);
+            }
+            catch(Exception e){
+                System.out.println("Var vänlig och välj en siffra");
+                findBookingChoice = 0;
+            }
+            if(findBookingChoice<1 || findBookingChoice>2){
+                System.out.println("Välj val 1 eller 2");
+                findBookingChoice = 0;
+            }
+        } while (wentToCatch==true);
+
         switch (findBookingChoice) {
             case 1:
                 System.out.println("Ange namnet för din bokning");
@@ -236,7 +241,7 @@ public class App {
     }
     static void cancelBooking(String[][] seating){
         boolean bookingFound= false;
-        System.out.println("Skriv in personnummret för bokningen");
+        System.out.println("Skriv in personnummret eller namnet för bokningen");
         String searchKey = tb.nextLine();
         //Om bokning matchar nyckeln nollställs platsen
         for (int i = 0; i < seating.length; i++) {
@@ -246,6 +251,7 @@ public class App {
                     seating[i][1] = "";
                     seating[i][2] = "";
                     bookingFound=true;
+                    System.out.println("Avbokning genomförd");
                     break;
             }  
         }

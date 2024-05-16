@@ -94,13 +94,13 @@ public class App {
                     wentToCatch = false;
                     seat = tb.nextInt();
                     seat--;
+                    seating[seat][0]= "0";
                 } 
                 catch (Exception e) {
-                    tb.next();
                     wentToCatch = true;
                     System.out.println("Var vänlig och välj en siffra");
                 }
-                if (seat<0 || seat>21) {
+                if (seat<1 || seat>20) {
                     wentToCatch = true;
                     System.out.println("Välj en giltig plats");
                 }

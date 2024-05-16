@@ -234,6 +234,26 @@ public class App {
             System.out.println("Ingen bokning hittades");
         }
     }
+    static void cancelBooking(String[][] seating){
+        boolean bookingFound= false;
+        System.out.println("Skriv in personnummret för bokningen");
+        String searchKey = tb.nextLine();
+        //Om bokning matchar nyckeln nollställs platsen
+        for (int i = 0; i < seating.length; i++) {
+            if (searchKey.equals(seating[i][2]) || searchKey.equals(seating[i][1])) {
+                    System.out.println("Bokning hittad på plats: "+(i+1));
+                    seating[i][0] = "0";
+                    seating[i][1] = "";
+                    seating[i][2] = "";
+                    bookingFound=true;
+                    break;
+            }  
+        }
+        if(bookingFound==false){
+            System.out.println("Ingen bokning hittades");
+        }   
+
+    }
     
 
 }

@@ -192,6 +192,48 @@ public class App {
             
         
     }
+    static void findBooking(String[][] seating){
+        boolean bookingFound=false;
+        String choiceRead;
+        int findBookingChoice;
+
+        System.out.println("Vill du leta efter din bokning med: \n 1. Namn \n 2. Personnummer");
+        choiceRead = tb.nextLine();
+        //Try-catch sats
+        try{
+            findBookingChoice = Integer.parseInt(choiceRead);
+        }
+        catch(Exception e){
+            System.out.println("Var vänlig och välj en siffra");
+            findBookingChoice = 0;
+        }
+        if(findBookingChoice<1 || findBookingChoice>2){
+            System.out.println("Välj val 1 eller 2");
+            findBookingChoice = 0;
+        }
+        switch (findBookingChoice) {
+            case 1:
+                System.out.println("Ange namnet för din bokning");
+                break;
+            case 2:
+                System.out.println("Ange personummer för platsen du vill avboka");
+                break;
+        }
+        String searchKey = tb.nextLine();
+        //Om en bokning matchar med nyckeln skrivs bokningen ut
+        for (int i = 0; i < seating.length; i++) {
+            if (searchKey.equals(seating[i][findBookingChoice])) {
+                    System.out.println("Bokning hittad på plats: "+(i+1));
+                    System.out.println("Namn: "+seating[i][1]);
+                    System.out.println("Personnummer: "+seating[i][2]);
+                    bookingFound=true;
+                    break;
+            }  
+        }
+        if(bookingFound==false){
+            System.out.println("Ingen bokning hittades");
+        }
+    }
     
 
 }

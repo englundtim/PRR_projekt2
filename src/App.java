@@ -254,7 +254,36 @@ public class App {
         }   
 
     }
-    
+    static void ageSorting(String[][] seating){
+        int[] seatingOrder = new int[20];
+        int temp = 0;
+
+        // Sparar platsen för bokningar
+        int orderIndex = 0;
+        for (int i = 0; i < seating.length; i++) {
+            if (seating[i][0].equals("1")) {
+                seatingOrder[orderIndex++] = i;
+            }
+        }
+        System.out.println();
+        // Bubblesortering
+        for (int i = 0; i < orderIndex - 1; i++) {
+            for (int j = i + 1; j < orderIndex; j++) {
+                if (Long.parseLong(seating[seatingOrder[i]][2]) > Long.parseLong(seating[seatingOrder[j]][2])) {
+                    temp = seatingOrder[i];
+                    seatingOrder[i] = seatingOrder[j];
+                    seatingOrder[j] = temp;
+                }
+            }
+        }
+        //Tillkallar bokningar i rätt ordning
+        for (int i = 0; i < orderIndex; i++) {
+            int index = seatingOrder[i];
+            System.out.println("Namn: " + seating[index][1] + ", Personnummer: " + seating[index][2] + ", Plats: " + (index + 1));
+
+        }
+        
+    }
 
 }
 
